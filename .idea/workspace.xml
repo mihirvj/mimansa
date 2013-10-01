@@ -5,7 +5,7 @@
     <ignored path="Mimansa.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380144438434" ignored="false" />
-    <file path="/index.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380239350624" ignored="false" />
+    <file path="/index.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380598979071" ignored="false" />
     <file path="/posts_helper.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380205994722" ignored="false" />
     <file path="/20130913212234_create_posts.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380135002319" ignored="false" />
     <file path="/_form.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380584356080" ignored="false" />
@@ -105,13 +105,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="highcharts.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="highcharts.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/highcharts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="346" selection-start="30602" selection-end="30603" vertical-scroll-proportion="3.3392856">
+            <state line="66" column="346" selection-start="30602" selection-end="30603" vertical-scroll-proportion="-44.88">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="9" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.69552237">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -184,7 +193,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/users/show.html.erb" />
         <option value="$PROJECT_DIR$/app/views/users/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
@@ -200,6 +208,7 @@
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/rails.js" />
+        <option value="$PROJECT_DIR$/app/views/users/index.html.erb" />
       </list>
     </option>
   </component>
@@ -1076,7 +1085,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1279" height="760" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1087,7 +1096,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277027" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3253205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3253205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1164,13 +1173,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/helpers/posts_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="15" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="122" column="63" selection-start="3768" selection-end="3768" vertical-scroll-proportion="0.0">
@@ -1273,10 +1275,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/highcharts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="346" selection-start="30602" selection-end="30603" vertical-scroll-proportion="3.3392856">
+        <state line="66" column="346" selection-start="30602" selection-end="30603" vertical-scroll-proportion="-44.88">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="9" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.69552237">
+          <folding />
         </state>
       </provider>
     </entry>
