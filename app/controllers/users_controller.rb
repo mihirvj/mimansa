@@ -21,6 +21,15 @@
   # GET /users/1
     # GET /users/1.json
   def show
+    puts "-----------------------------------"
+    puts "-----------------------------------"
+    puts "-----------------------------------"
+    puts "-----------------------------------"
+    puts "-----------------------------------"
+    puts "-----------------------------------"
+    puts "-----------------------------------"
+
+
     if (!current_user.is_super_admin && !current_user.is_admin)
       redirect_to posts_path
       return
@@ -116,7 +125,7 @@
 
     if(User.all.count == 0)
       is_super_admin = 1
-      is_admin = 1
+      #is_admin = 1
     end
 
     @user = User.new(:email => request.POST[:user][:email], :password => request.POST[:user][:password],
