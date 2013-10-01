@@ -1,0 +1,42 @@
+<h1>Listing users</h1>
+
+<table width="100%" style="text-align: center;">
+  <tr>
+    <th>Email</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Last logged</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.email %></td>
+    <td><%= user.first_name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.last_logged %></td>
+    <td><%= link_to 'Show', user %></td>
+    <% if user != current_user && !user.is_super_admin && (current_user.is_super_admin || (current_user.is_admin)) %>
+        <% if (current_user.is_super_admin || current_user.is_admin) && !user.is_admin %>
+            <td><%= link_to 'Set Admin', set_admin_path(user) %></td>
+        <% elsif current_user.is_super_admin %>
+            <td><%= link_to 'Remove Admin', unset_admin_path(user) %></td>
+        <% else %>
+            <td>&nbsp</td>
+        <% end %>
+    <% else %>
+        <td>&nbsp</td>
+    <% end %>
+    <% if  (current_user.is_super_admin && user != current_user) || (current_user.is_admin && user == current_user) || (!user.is_admin && !user.is_super_admin)%>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'View Posts', posts_path %> |
+<%= link_to 'Manage Categories', categories_path %>

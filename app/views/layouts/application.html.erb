@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mimanzo</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <link href="/assets/style.css" media="all" rel="stylesheet" type="text/css">
+  <link href="/assets/prism.css" media="all" rel="stylesheet" type="text/css">
+  <link href="/assets/chosen.css" media="all" rel="stylesheet" type="text/css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+  <script src="/assets/chosen.jquery.js" type="text/javascript"></script>
+  <script src="/assets/prism.js" type="text/javascript"></script>
+  <%= javascript_include_tag "application", "highcharts", "rails" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <nav>
+        <table width="100%">
+          <tr>
+            <td width="75%">
+              <% if !current_user.nil? %>
+                  <%= current_user.first_name + ' ' + current_user.last_name + '\'s' %>
+              <% end %>
+              <%= link_to "Mimanzo", 'http://mimanzo.herokuapp.com', id: "logo" %>
+            </td>
+            <td width="25%">
+              &nbsp
+              <%= link_to "Home", root_path %>
+
+              <% if signed_in? %>
+                  <%= link_to "Update your Profile", edit_user_path(current_user) %>
+                  <%= link_to "Sign out", logout_path, method: "delete" %>
+              <% else %>
+                  <%= link_to "Sign in ", login_path %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </nav>
+    </div>
+  </div>
+</header>
+<hr>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <%= yield %>
+
+  <footer class="footer">
+    <small>
+      <a href="#">Backchannel App</a>
+      Developed by <a target="_blank" href="http://www.mihirjoshi.info">Mihir Joshi</a>, <a target="_blank" href="http://www.fenilkavathia.com/">Fenil Kavathia</a> and Vineeta Khurana
+    </small>
+    <nav>
+      <ul>
+        <!--<li><%= link_to "About", '#' %></li>-->
+        <!--<li><%= link_to "Contact", '#' %></li>-->
+      </ul>
+    </nav>
+  </footer>
+  <!--<div><%= debug(params) if Rails.env.development? %></div> -->
+</div>
+</body>
+</html>

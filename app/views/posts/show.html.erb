@@ -1,0 +1,91 @@
+<div class="field">
+  <b>Category</b>
+  <br/>
+  <% if !@categories.nil? %>
+      <% @categories.each do |category| %>
+          <% @selected = '' %>
+          <% if category_present(category.id, @post.id)
+               @selected = 'checked'
+             end %>
+          <input type="radio" name="category" disabled="disabled" value="<%=category.id%>" <%=@selected%>> <%=category.name%></input>
+      <% end %>
+  <% end %>
+
+</div>
+<p>
+  <b>Subject:</b>
+  <%= @post.subject %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @post.description %>
+</p>
+
+<p>
+  <b>Post by:</b>
+  <%= user_name(@post.created_by) %>
+</p>
+
+Votes: <%= votes_count @post.id %> &nbsp &nbsp<%= link_to 'Vote up', vote_up_path(@post) %>
+
+<h3>Tags</h3>
+<select name="tags" data-placeholder="Tag the Question" id="myselect" multiple="" class="chosen-select-width" tabindex="-1" style="display: none;" readonly>
+  <option value=""></option>
+  <% if !@tags.nil? %>
+      <% @tags.each do |tag| %>
+          <% @selected = '' %>
+          <% if tag_present(tag.id, @post.id)
+               @selected = 'selected'
+             end %>
+          <option disabled="disabled" value='<%= tag.id %>' <%= @selected %>><%= tag.tag_name %></option>
+      <% end %>
+  <% end %>
+</select>
+<br>
+<%= link_to 'Back', posts_path %>
+
+<% if !current_user.nil? and ((signed_in? and is_owner?(@post, current_user, true))) %>
+    <td><%= link_to 'Edit', edit_post_path(@post) %></td>
+<% end %>
+
+<% if !current_user.nil? and ((signed_in? and is_owner?(@post, current_user, true)) or current_user.is_admin or current_user.is_super_admin) %>
+    <td><%= link_to 'Remove Post', @post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+<% end %>
+
+<h3>Comments</h3> <br>
+<% if(@comments.count == 0) %>
+    No comments!
+<% end %>
+
+<table width="50%">
+<% @comments.each do |comment| %>
+    <tr>
+      <td><%= comment.description %></td>
+      <td>&nbsp Votes: <%= votes_comment_count comment.id %></td>
+      <td><%= link_to 'Vote up', comment_vote_up_path(comment) %></td>
+    </tr>
+<% end %>
+</table>
+
+<br><br>
+
+<%= render 'comment_form' %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //$(".chosen-select-width").chosen();
+        var config = {
+            '.chosen-select': {disable_search: true},
+            '.chosen-select-deselect': {allow_single_deselect: true},
+            '.chosen-select-no-single': {disable_search_threshold: 3},
+            '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+            '.chosen-select-width': {width: "600px"}
+        }
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    });
+
+</script>

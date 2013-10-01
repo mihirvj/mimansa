@@ -1,0 +1,89 @@
+<p>
+  <%= gravatar @user %>
+</p>
+<h1>
+  <%= @user.first_name + ' ' + @user.last_name%>
+</h1>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @user.last_name %>
+</p>
+
+
+<!--<%= link_to 'Edit', edit_user_path(@user) %> |-->
+<% if current_user == @user %>
+    <%= link_to 'Edit', edit_user_path(current_user) %>
+<% end %>
+
+<%= link_to 'Back', users_path %>
+
+<div id="container" style="background: #EEE; min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#container').highcharts({
+            title: {
+                text: "<%= @user.first_name + ' ' + @user.last_name%>'s Activity",
+                x: -20 //center
+            },
+            subtitle: {
+                text: '',
+                x: -20
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yAxis: {
+                title: {
+                    text: 'Activity Count'
+                },
+                plotLines: [
+                    {
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }
+                ]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [
+                {
+                    name: 'Posts',
+                    data: <%= @a_posts_per_month %>
+                },
+                {
+                    name: 'Comment',
+                    data: <%= @a_comments_per_month %>
+                },
+                {
+                    name: 'Votes',
+                    data: <%= @a_votes_per_month %>
+                }
+            ]
+        });
+
+        $('container').highcharts().show();
+    });
+
+
+</script>

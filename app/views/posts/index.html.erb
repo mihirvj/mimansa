@@ -1,0 +1,54 @@
+<%= form_tag posts_path, :method => 'get' do %>
+    <div>
+      <%= select_tag :type, options_for_select({"Content" => :content, "Category" => :category, "User" => :user, "Tag" => :tag}, params[:type]) %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </div>
+<% end %>
+
+<h1>Listing posts</h1>
+
+<br>
+
+<% if signed_in? %>
+    <%= link_to 'New Post', new_post_path %>
+<% else %>
+    <%= link_to 'Login', login_path %>
+<% end %>
+
+<br>
+
+<table width="100%" style="text-align: center;">
+  <tr>
+    <th>Votes</th>
+    <th>Comments</th>
+    <th style="text-align: left;">Subject</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td width="10%"><%= votes_count(post.id) %></td>
+    <td width="10%"><%= comment_count(post.id) %></td>
+    <td width="70%" style="text-align: left;"><%= link_to post.subject, post %></td>
+    <% if !current_user.nil? && (current_user.is_super_admin || current_user.is_admin) %>
+        <td width="10%" style="text-align: left;"><%= link_to 'Delete Post', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if signed_in? %>
+    <%= link_to 'New Post', new_post_path %>
+
+    <% if !current_user.nil? && (current_user.is_super_admin || current_user.is_admin) %>
+        | <%= link_to 'Go to Users', users_path %>
+    <% end %>
+<% end %>
+<% if !signed_in? %>
+    <%= link_to 'Login', login_path %>
+<% end %>

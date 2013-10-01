@@ -1,0 +1,81 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+        <div id="error_explanation" xmlns="http://www.w3.org/1999/html">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+      <%= f.label 'Category' %><br/>
+      <% if !@categories.nil? %>
+          <% @categories.each do |category| %>
+              <% @selected = '' %>
+              <% if category_present(category.id, @post.id)
+                   @selected = 'checked'
+                 end %>
+              <input type="radio" name="category" value="<%=category.id%>" <%= @selected %>><%=category.name%> </input>
+          <% end %>
+      <% end %>
+    </div>
+
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject, :id => "app_text" %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :id => "app_textarea" %>
+  </div>
+    <h3>Tags</h3>
+    <select name="tags" data-placeholder="Tag the Question" multiple="" class="chosen-select-width" tabindex="-1" style="width: 600px; display: no; ">
+      <option value=""></option>
+      <% if !@tags.nil? %>
+      <% @tags.each do |tag| %>
+              <% @selected = '' %>
+         <% if tag_present(tag.id, @post.id)
+                @selected = 'selected'
+            end %>
+      <option value='<%= tag.id %>' <%= @selected %>><%= tag.tag_name %></option>
+      <% end %>
+      <% end %>
+    </select>
+
+    <input type="hidden" name="all_tags" id="all_tags" />
+    <br>
+
+    Not able to find specific tag? Don't worry! You can create one: <input type="text" name="tag_new" />
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //$(".chosen-select-width").chosen();
+
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+            $(".chosen-select-width").chosen().change(function(){
+                var  selectedValue = $(this).val()
+                $("#all_tags").val(selectedValue)
+                console.log(selectedValue );  //this will print array in console.
+                //alert(seletedValue.join(',')); //this will alert all values ,comma seperated
+            });
+        });
+
+    </script>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
