@@ -63,7 +63,7 @@
     <file path="/application.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380589281554" ignored="false" />
     <file path="/categories.js.coffee" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380594530028" ignored="false" />
     <file path="/production.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380597158911" ignored="false" />
-    <file path="/sessions_helper.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380600369954" ignored="false" />
+    <file path="/sessions_helper.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380602195536" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +129,7 @@
       <file leaf-file-name="sessions_helper.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/helpers/sessions_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="4" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0">
+            <state line="35" column="5" selection-start="862" selection-end="862" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -153,19 +153,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sessions_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="sessions_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="14" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0">
+            <state line="27" column="3" selection-start="769" selection-end="769" vertical-scroll-proportion="0.71657753">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="52" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.38770053">
+            <state line="75" column="52" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -208,8 +208,8 @@
         <option value="$PROJECT_DIR$/app/views/users/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/users/show.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-        <option value="$PROJECT_DIR$/app/helpers/sessions_helper.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/helpers/sessions_helper.rb" />
       </list>
     </option>
   </component>
@@ -1269,23 +1269,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="52" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/sessions_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="4" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0">
+        <state line="35" column="5" selection-start="862" selection-end="862" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="14" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="52" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.38770053">
+        <state line="27" column="3" selection-start="769" selection-end="769" vertical-scroll-proportion="0.71657753">
           <folding />
         </state>
       </provider>
