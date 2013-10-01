@@ -21,6 +21,8 @@
                  end %>
               <input type="radio" name="category" value="<%=category.id%>" <%= @selected %>><%=category.name%> </input>
           <% end %>
+      <% else %>
+        <p style="color:red;">Categories are not set in the system. You cannot create Post. Please contact your administrator.</p>
       <% end %>
     </div>
 
