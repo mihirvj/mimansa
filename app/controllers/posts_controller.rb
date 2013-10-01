@@ -121,6 +121,17 @@ class PostsController < ApplicationController
     return true
   end
 
+  def comment_destroy
+    comment = Comment.find(params[:id])
+
+    comment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+    end
+  end
+
   def comment
     post = Post.find(params[:id])
 

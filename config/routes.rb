@@ -67,6 +67,7 @@ Mimansa::Application.routes.draw do
   get 'vote_up/:id' => 'Posts#vote_up', as: 'vote_up'
   match 'posts/:id/comment', :to => 'posts#comment', :as => 'comment'
   match 'posts/:id/comment_vote_up', :to => "posts#comment_vote_up", as: 'comment_vote_up'
+  match 'posts/:id/comment_destroy', :to => "posts#comment_destroy", as: 'comment_destroy'
   get 'posts/:id/edit', :to => "posts#edit", as: 'edit'
 
   resources :sessions, only: [:new, :create, :destroy]
