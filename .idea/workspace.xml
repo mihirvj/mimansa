@@ -10,7 +10,7 @@
     <file path="/20130913212234_create_posts.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380135002319" ignored="false" />
     <file path="/_form.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380584356080" ignored="false" />
     <file path="/posts_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380581419709" ignored="false" />
-    <file path="/show.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380582612070" ignored="false" />
+    <file path="/show.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380599087388" ignored="false" />
     <file path="/application_helper.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379108555805" ignored="false" />
     <file path="/a.dummy" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380590408257" ignored="false" />
     <file path="/routes.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380585779540" ignored="false" />
@@ -41,7 +41,7 @@
     <file path="D:/RubyCodes/exam_module.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379698504874" ignored="false" />
     <file path="/exam_module.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379698504874" ignored="false" />
     <file path="/Gemfile" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380588023647" ignored="false" />
-    <file path="/users_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380583414617" ignored="false" />
+    <file path="/users_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380599449082" ignored="false" />
     <file path="/application_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380585475037" ignored="false" />
     <file path="/sessions_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380586022615" ignored="false" />
     <file path="$PROJECT_DIR$/log/development.log" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380239327027" ignored="false" />
@@ -116,10 +116,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
+      <file leaf-file-name="users_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="9" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.69552237">
+            <state line="43" column="70" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.8587258">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/users/show.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="9" selection-start="2034" selection-end="2034" vertical-scroll-proportion="-8.807693">
               <folding />
             </state>
           </provider>
@@ -170,15 +179,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prism.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/prism.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="727" selection-start="6646" selection-end="6652" vertical-scroll-proportion="-5.44">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -193,14 +193,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/users/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/sessions/notfound.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/style.css" />
-        <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
@@ -209,6 +207,8 @@
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/rails.js" />
         <option value="$PROJECT_DIR$/app/views/users/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/users/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
       </list>
     </option>
   </component>
@@ -1173,20 +1173,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="63" selection-start="3768" selection-end="3768" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="4" selection-start="4124" selection-end="4124" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/home.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1273,6 +1259,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="9" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.69552237">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/highcharts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="66" column="346" selection-start="30602" selection-end="30603" vertical-scroll-proportion="-44.88">
@@ -1282,9 +1275,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/users/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="9" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.69552237">
+        <state line="83" column="9" selection-start="2034" selection-end="2034" vertical-scroll-proportion="-8.807693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="70" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.8587258">
           <folding />
         </state>
       </provider>

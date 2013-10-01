@@ -33,10 +33,15 @@
     votes_posts = VotesPost.where(:user_id => @user.id)
     votes_comments = VotesComment.where(:user_id => @user.id)
 
-    posts_per_month = posts.count(:group => "strftime('%m', created_at)")
-    comments_per_month = comments.count(:group => "strftime('%m', created_at)")
-    votes_posts_per_month = votes_posts.count(:group => "strftime('%m', created_at)")
-    votes_comments_per_month = votes_comments.count(:group => "strftime('%m', created_at)")
+    #posts_per_month = posts.count(:group => "strftime('%m', created_at)")
+    #comments_per_month = comments.count(:group => "strftime('%m', created_at)")
+    #votes_posts_per_month = votes_posts.count(:group => "strftime('%m', created_at)")
+    #votes_comments_per_month = votes_comments.count(:group => "strftime('%m', created_at)")
+
+    posts_per_month = posts.count(:group => "extract(month from created_at)")
+    comments_per_month = comments.count(:group => "extract(month from created_at)")
+    votes_posts_per_month = votes_posts.count(:group => "extract(month from created_at)")
+    votes_comments_per_month = votes_comments.count(:group => "extract(month from created_at)")
 
     @a_posts_per_month = [0,0,0,0,0,0,0,0,0,0,0,0]
     @a_comments_per_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
