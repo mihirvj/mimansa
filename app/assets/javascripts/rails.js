@@ -1,7 +1,7 @@
 
 
 
-<!DOCTYPE html>
+//<!DOCTYPE html>
 <html>
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#">
     <meta charset='utf-8'>
@@ -1189,7 +1189,2930 @@
 
             </td>
             <td class="blob-line-code">
-                    <div class="highlight"><pre><div class='line' id='LC1'><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC2'><br/></div><div class='line' id='LC3'><span class="cm">/**</span></div><div class='line' id='LC4'><span class="cm"> * Unobtrusive scripting adapter for jQuery</span></div><div class='line' id='LC5'><span class="cm"> * https://github.com/rails/jquery-ujs</span></div><div class='line' id='LC6'><span class="cm"> *</span></div><div class='line' id='LC7'><span class="cm"> * Requires jQuery 1.7.0 or later.</span></div><div class='line' id='LC8'><span class="cm"> *</span></div><div class='line' id='LC9'><span class="cm"> * Released under the MIT license</span></div><div class='line' id='LC10'><span class="cm"> *</span></div><div class='line' id='LC11'><span class="cm"> */</span></div><div class='line' id='LC12'><br/></div><div class='line' id='LC13'>&nbsp;&nbsp;<span class="c1">// Cut down on the number of issues from people inadvertently including jquery_ujs twice</span></div><div class='line' id='LC14'>&nbsp;&nbsp;<span class="c1">// by detecting and raising an error when it happens.</span></div><div class='line' id='LC15'>&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span> <span class="nx">$</span><span class="p">.</span><span class="nx">rails</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC16'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;jquery-ujs has already been loaded!&#39;</span><span class="p">);</span></div><div class='line' id='LC17'>&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC18'><br/></div><div class='line' id='LC19'>&nbsp;&nbsp;<span class="c1">// Shorthand to make it a little easier to call public rails functions from within rails.js</span></div><div class='line' id='LC20'>&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">rails</span><span class="p">;</span></div><div class='line' id='LC21'>&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">$document</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span></div><div class='line' id='LC22'><br/></div><div class='line' id='LC23'>&nbsp;&nbsp;<span class="nx">$</span><span class="p">.</span><span class="nx">rails</span> <span class="o">=</span> <span class="nx">rails</span> <span class="o">=</span> <span class="p">{</span></div><div class='line' id='LC24'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Link elements bound by jquery-ujs</span></div><div class='line' id='LC25'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">linkClickSelector</span><span class="o">:</span> <span class="s1">&#39;a[data-confirm], a[data-method], a[data-remote], a[data-disable-with]&#39;</span><span class="p">,</span></div><div class='line' id='LC26'><br/></div><div class='line' id='LC27'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Button elements boud jquery-ujs</span></div><div class='line' id='LC28'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">buttonClickSelector</span><span class="o">:</span> <span class="s1">&#39;button[data-remote]&#39;</span><span class="p">,</span></div><div class='line' id='LC29'><br/></div><div class='line' id='LC30'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Select elements bound by jquery-ujs</span></div><div class='line' id='LC31'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">inputChangeSelector</span><span class="o">:</span> <span class="s1">&#39;select[data-remote], input[data-remote], textarea[data-remote]&#39;</span><span class="p">,</span></div><div class='line' id='LC32'><br/></div><div class='line' id='LC33'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Form elements bound by jquery-ujs</span></div><div class='line' id='LC34'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">formSubmitSelector</span><span class="o">:</span> <span class="s1">&#39;form&#39;</span><span class="p">,</span></div><div class='line' id='LC35'><br/></div><div class='line' id='LC36'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Form input elements bound by jquery-ujs</span></div><div class='line' id='LC37'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">formInputClickSelector</span><span class="o">:</span> <span class="s1">&#39;form input[type=submit], form input[type=image], form button[type=submit], form button:not([type])&#39;</span><span class="p">,</span></div><div class='line' id='LC38'><br/></div><div class='line' id='LC39'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Form input elements disabled during form submission</span></div><div class='line' id='LC40'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">disableSelector</span><span class="o">:</span> <span class="s1">&#39;input[data-disable-with], button[data-disable-with], textarea[data-disable-with]&#39;</span><span class="p">,</span></div><div class='line' id='LC41'><br/></div><div class='line' id='LC42'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Form input elements re-enabled after form submission</span></div><div class='line' id='LC43'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">enableSelector</span><span class="o">:</span> <span class="s1">&#39;input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled&#39;</span><span class="p">,</span></div><div class='line' id='LC44'><br/></div><div class='line' id='LC45'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Form required input elements</span></div><div class='line' id='LC46'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">requiredInputSelector</span><span class="o">:</span> <span class="s1">&#39;input[name][required]:not([disabled]),textarea[name][required]:not([disabled])&#39;</span><span class="p">,</span></div><div class='line' id='LC47'><br/></div><div class='line' id='LC48'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Form file input elements</span></div><div class='line' id='LC49'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">fileInputSelector</span><span class="o">:</span> <span class="s1">&#39;input[type=file]&#39;</span><span class="p">,</span></div><div class='line' id='LC50'><br/></div><div class='line' id='LC51'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Link onClick disable selector with possible reenable after remote submission</span></div><div class='line' id='LC52'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">linkDisableSelector</span><span class="o">:</span> <span class="s1">&#39;a[data-disable-with]&#39;</span><span class="p">,</span></div><div class='line' id='LC53'><br/></div><div class='line' id='LC54'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Make sure that every Ajax request sends the CSRF token</span></div><div class='line' id='LC55'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">CSRFProtection</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC56'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=&quot;csrf-token&quot;]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span></div><div class='line' id='LC57'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;X-CSRF-Token&#39;</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span></div><div class='line' id='LC58'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC59'><br/></div><div class='line' id='LC60'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Triggers an event on an element and returns false if the event result is false</span></div><div class='line' id='LC61'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">fire</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC62'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Event</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span></div><div class='line' id='LC63'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">obj</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span></div><div class='line' id='LC64'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">event</span><span class="p">.</span><span class="nx">result</span> <span class="o">!==</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC65'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC66'><br/></div><div class='line' id='LC67'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Default confirm dialog, may be overridden with custom confirm dialog in $.rails.confirm</span></div><div class='line' id='LC68'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">confirm</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC69'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">confirm</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span></div><div class='line' id='LC70'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC71'><br/></div><div class='line' id='LC72'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Default ajax function, may be overridden with custom function in $.rails.ajax</span></div><div class='line' id='LC73'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">ajax</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC74'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span></div><div class='line' id='LC75'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC76'><br/></div><div class='line' id='LC77'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Default way to get an element&#39;s href. May be overridden at $.rails.href.</span></div><div class='line' id='LC78'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">href</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC79'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">element</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">);</span></div><div class='line' id='LC80'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC81'><br/></div><div class='line' id='LC82'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Submits &quot;remote&quot; forms and links with ajax</span></div><div class='line' id='LC83'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">handleRemote</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC84'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">method</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">elCrossDomain</span><span class="p">,</span> <span class="nx">crossDomain</span><span class="p">,</span> <span class="nx">withCredentials</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">,</span> <span class="nx">options</span><span class="p">;</span></div><div class='line' id='LC85'><br/></div><div class='line' id='LC86'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;ajax:before&#39;</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC87'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">elCrossDomain</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;cross-domain&#39;</span><span class="p">);</span></div><div class='line' id='LC88'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">crossDomain</span> <span class="o">=</span> <span class="nx">elCrossDomain</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="nx">elCrossDomain</span><span class="p">;</span></div><div class='line' id='LC89'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">withCredentials</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;with-credentials&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span></div><div class='line' id='LC90'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">dataType</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">ajaxSettings</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajaxSettings</span><span class="p">.</span><span class="nx">dataType</span><span class="p">);</span></div><div class='line' id='LC91'><br/></div><div class='line' id='LC92'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC93'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">method</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">);</span></div><div class='line' id='LC94'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">url</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span></div><div class='line' id='LC95'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">data</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">serializeArray</span><span class="p">();</span></div><div class='line' id='LC96'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// memoized value from clicked submit button</span></div><div class='line' id='LC97'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:submit-button&#39;</span><span class="p">);</span></div><div class='line' id='LC98'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">button</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC99'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span></div><div class='line' id='LC100'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:submit-button&#39;</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span></div><div class='line' id='LC101'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC102'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">inputChangeSelector</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC103'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">method</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">);</span></div><div class='line' id='LC104'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">url</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">);</span></div><div class='line' id='LC105'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">data</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">serialize</span><span class="p">();</span></div><div class='line' id='LC106'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">))</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">+</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">);</span></div><div class='line' id='LC107'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">buttonClickSelector</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC108'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">method</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;get&#39;</span><span class="p">;</span></div><div class='line' id='LC109'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">url</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">);</span></div><div class='line' id='LC110'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">data</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">serialize</span><span class="p">();</span></div><div class='line' id='LC111'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">))</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">+</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">);</span></div><div class='line' id='LC112'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="p">{</span></div><div class='line' id='LC113'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">method</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">);</span></div><div class='line' id='LC114'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">url</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">href</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span></div><div class='line' id='LC115'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">data</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span></div><div class='line' id='LC116'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC117'><br/></div><div class='line' id='LC118'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">options</span> <span class="o">=</span> <span class="p">{</span></div><div class='line' id='LC119'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">type</span><span class="o">:</span> <span class="nx">method</span> <span class="o">||</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">dataType</span><span class="o">:</span> <span class="nx">dataType</span><span class="p">,</span></div><div class='line' id='LC120'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// stopping the &quot;ajax:beforeSend&quot; event will cancel the ajax request</span></div><div class='line' id='LC121'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">beforeSend</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">settings</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC122'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dataType</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC123'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;accept&#39;</span><span class="p">,</span> <span class="s1">&#39;*/*;q=0.5, &#39;</span> <span class="o">+</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">accepts</span><span class="p">.</span><span class="nx">script</span><span class="p">);</span></div><div class='line' id='LC124'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC125'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;ajax:beforeSend&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">settings</span><span class="p">]);</span></div><div class='line' id='LC126'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC127'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC128'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;ajax:success&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">]);</span></div><div class='line' id='LC129'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC130'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">status</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC131'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;ajax:complete&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">status</span><span class="p">]);</span></div><div class='line' id='LC132'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC133'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC134'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;ajax:error&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">error</span><span class="p">]);</span></div><div class='line' id='LC135'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC136'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">crossDomain</span><span class="o">:</span> <span class="nx">crossDomain</span></div><div class='line' id='LC137'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">};</span></div><div class='line' id='LC138'><br/></div><div class='line' id='LC139'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// There is no withCredentials for IE6-8 when</span></div><div class='line' id='LC140'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// &quot;Enable native XMLHTTP support&quot; is disabled</span></div><div class='line' id='LC141'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">withCredentials</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC142'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">options</span><span class="p">.</span><span class="nx">xhrFields</span> <span class="o">=</span> <span class="p">{</span></div><div class='line' id='LC143'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">withCredentials</span><span class="o">:</span> <span class="nx">withCredentials</span></div><div class='line' id='LC144'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">};</span></div><div class='line' id='LC145'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC146'><br/></div><div class='line' id='LC147'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Only pass url to `ajax` options if not blank</span></div><div class='line' id='LC148'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span> <span class="nx">options</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span> <span class="p">}</span></div><div class='line' id='LC149'><br/></div><div class='line' id='LC150'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">jqxhr</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span></div><div class='line' id='LC151'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;ajax:send&#39;</span><span class="p">,</span> <span class="nx">jqxhr</span><span class="p">);</span></div><div class='line' id='LC152'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">jqxhr</span><span class="p">;</span></div><div class='line' id='LC153'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="p">{</span></div><div class='line' id='LC154'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC155'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC156'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC157'><br/></div><div class='line' id='LC158'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Handles &quot;data-method&quot; on links such as:</span></div><div class='line' id='LC159'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// &lt;a href=&quot;/users/5&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot; data-confirm=&quot;Are you sure?&quot;&gt;Delete&lt;/a&gt;</span></div><div class='line' id='LC160'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">handleMethod</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">link</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC161'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">href</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">href</span><span class="p">(</span><span class="nx">link</span><span class="p">),</span></div><div class='line' id='LC162'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">method</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">),</span></div><div class='line' id='LC163'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">target</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">),</span></div><div class='line' id='LC164'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">csrf_token</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=csrf-token]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">),</span></div><div class='line' id='LC165'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">csrf_param</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=csrf-param]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">),</span></div><div class='line' id='LC166'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;form method=&quot;post&quot; action=&quot;&#39;</span> <span class="o">+</span> <span class="nx">href</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&lt;/form&gt;&#39;</span><span class="p">),</span></div><div class='line' id='LC167'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">metadata_input</span> <span class="o">=</span> <span class="s1">&#39;&lt;input name=&quot;_method&quot; value=&quot;&#39;</span> <span class="o">+</span> <span class="nx">method</span> <span class="o">+</span> <span class="s1">&#39;&quot; type=&quot;hidden&quot; /&gt;&#39;</span><span class="p">;</span></div><div class='line' id='LC168'><br/></div><div class='line' id='LC169'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">csrf_param</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">csrf_token</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC170'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">metadata_input</span> <span class="o">+=</span> <span class="s1">&#39;&lt;input name=&quot;&#39;</span> <span class="o">+</span> <span class="nx">csrf_param</span> <span class="o">+</span> <span class="s1">&#39;&quot; value=&quot;&#39;</span> <span class="o">+</span> <span class="nx">csrf_token</span> <span class="o">+</span> <span class="s1">&#39;&quot; type=&quot;hidden&quot; /&gt;&#39;</span><span class="p">;</span></div><div class='line' id='LC171'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC172'><br/></div><div class='line' id='LC173'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span> <span class="nx">form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span> <span class="p">}</span></div><div class='line' id='LC174'><br/></div><div class='line' id='LC175'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">form</span><span class="p">.</span><span class="nx">hide</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="nx">metadata_input</span><span class="p">).</span><span class="nx">appendTo</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">);</span></div><div class='line' id='LC176'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span></div><div class='line' id='LC177'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC178'><br/></div><div class='line' id='LC179'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">/* Disables form elements:</span></div><div class='line' id='LC180'><span class="cm">      - Caches element value in &#39;ujs:enable-with&#39; data store</span></div><div class='line' id='LC181'><span class="cm">      - Replaces element text with value of &#39;data-disable-with&#39; attribute</span></div><div class='line' id='LC182'><span class="cm">      - Sets disabled property to true</span></div><div class='line' id='LC183'><span class="cm">    */</span></div><div class='line' id='LC184'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">disableFormElements</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">form</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC185'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">disableSelector</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span></div><div class='line' id='LC186'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="nx">method</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;html&#39;</span> <span class="o">:</span> <span class="s1">&#39;val&#39;</span><span class="p">;</span></div><div class='line' id='LC187'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">,</span> <span class="nx">element</span><span class="p">[</span><span class="nx">method</span><span class="p">]());</span></div><div class='line' id='LC188'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">[</span><span class="nx">method</span><span class="p">](</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;disable-with&#39;</span><span class="p">));</span></div><div class='line' id='LC189'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span></div><div class='line' id='LC190'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC191'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC192'><br/></div><div class='line' id='LC193'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">/* Re-enables disabled form elements:</span></div><div class='line' id='LC194'><span class="cm">      - Replaces element text with cached value from &#39;ujs:enable-with&#39; data store (created in `disableFormElements`)</span></div><div class='line' id='LC195'><span class="cm">      - Sets disabled property to false</span></div><div class='line' id='LC196'><span class="cm">    */</span></div><div class='line' id='LC197'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">enableFormElements</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">form</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC198'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">enableSelector</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span></div><div class='line' id='LC199'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="nx">method</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;html&#39;</span> <span class="o">:</span> <span class="s1">&#39;val&#39;</span><span class="p">;</span></div><div class='line' id='LC200'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">))</span> <span class="nx">element</span><span class="p">[</span><span class="nx">method</span><span class="p">](</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">));</span></div><div class='line' id='LC201'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span></div><div class='line' id='LC202'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC203'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC204'><br/></div><div class='line' id='LC205'>&nbsp;&nbsp;&nbsp;<span class="cm">/* For &#39;data-confirm&#39; attribute:</span></div><div class='line' id='LC206'><span class="cm">      - Fires `confirm` event</span></div><div class='line' id='LC207'><span class="cm">      - Shows the confirmation dialog</span></div><div class='line' id='LC208'><span class="cm">      - Fires the `confirm:complete` event</span></div><div class='line' id='LC209'><br/></div><div class='line' id='LC210'><span class="cm">      Returns `true` if no function stops the chain and user chose yes; `false` otherwise.</span></div><div class='line' id='LC211'><span class="cm">      Attaching a handler to the element&#39;s `confirm` event that returns a `falsy` value cancels the confirmation dialog.</span></div><div class='line' id='LC212'><span class="cm">      Attaching a handler to the element&#39;s `confirm:complete` event that returns a `falsy` value makes this function</span></div><div class='line' id='LC213'><span class="cm">      return false. The `confirm:complete` event is fired whether or not the user answered true or false to the dialog.</span></div><div class='line' id='LC214'><span class="cm">   */</span></div><div class='line' id='LC215'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">allowAction</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC216'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;confirm&#39;</span><span class="p">),</span></div><div class='line' id='LC217'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">answer</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">callback</span><span class="p">;</span></div><div class='line' id='LC218'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">}</span></div><div class='line' id='LC219'><br/></div><div class='line' id='LC220'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;confirm&#39;</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC221'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">answer</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span></div><div class='line' id='LC222'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">callback</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;confirm:complete&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">answer</span><span class="p">]);</span></div><div class='line' id='LC223'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC224'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">answer</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">;</span></div><div class='line' id='LC225'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC226'><br/></div><div class='line' id='LC227'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Helper function which checks for blank inputs in a form that match the specified CSS selector</span></div><div class='line' id='LC228'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">blankInputs</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">specifiedSelector</span><span class="p">,</span> <span class="nx">nonBlank</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC229'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(),</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">valueToCheck</span><span class="p">,</span></div><div class='line' id='LC230'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">selector</span> <span class="o">=</span> <span class="nx">specifiedSelector</span> <span class="o">||</span> <span class="s1">&#39;input,textarea&#39;</span><span class="p">,</span></div><div class='line' id='LC231'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">allInputs</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span></div><div class='line' id='LC232'><br/></div><div class='line' id='LC233'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">allInputs</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span></div><div class='line' id='LC234'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span></div><div class='line' id='LC235'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">valueToCheck</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;input[type=checkbox],input[type=radio]&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nx">input</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;:checked&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nx">input</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span></div><div class='line' id='LC236'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// If nonBlank and valueToCheck are both truthy, or nonBlank and valueToCheck are both falsey</span></div><div class='line' id='LC237'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">valueToCheck</span> <span class="o">===</span> <span class="o">!</span><span class="nx">nonBlank</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC238'><br/></div><div class='line' id='LC239'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Don&#39;t count unchecked required radio if other radio with same name is checked</span></div><div class='line' id='LC240'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;input[type=radio]&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">allInputs</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;input[type=radio]:checked[name=&quot;&#39;</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;]&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC241'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Skip to next input</span></div><div class='line' id='LC242'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC243'><br/></div><div class='line' id='LC244'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">inputs</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span></div><div class='line' id='LC245'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC246'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC247'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">length</span> <span class="o">?</span> <span class="nx">inputs</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC248'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC249'><br/></div><div class='line' id='LC250'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Helper function which checks for non-blank inputs in a form that match the specified CSS selector</span></div><div class='line' id='LC251'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">nonBlankInputs</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">specifiedSelector</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC252'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">blankInputs</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">specifiedSelector</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// true specifies nonBlank</span></div><div class='line' id='LC253'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC254'><br/></div><div class='line' id='LC255'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// Helper function, needed to provide consistent behavior in IE</span></div><div class='line' id='LC256'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">stopEverything</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC257'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;ujs:everythingStopped&#39;</span><span class="p">);</span></div><div class='line' id='LC258'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">e</span><span class="p">.</span><span class="nx">stopImmediatePropagation</span><span class="p">();</span></div><div class='line' id='LC259'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC260'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC261'><br/></div><div class='line' id='LC262'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">//  replace element&#39;s html with the &#39;data-disable-with&#39; after storing original html</span></div><div class='line' id='LC263'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">//  and prevent clicking on it</span></div><div class='line' id='LC264'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">disableElement</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC265'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">html</span><span class="p">());</span> <span class="c1">// store enabled state</span></div><div class='line' id='LC266'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;disable-with&#39;</span><span class="p">));</span> <span class="c1">// set to disabled state</span></div><div class='line' id='LC267'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;click.railsDisable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// prevent further clicking</span></div><div class='line' id='LC268'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span></div><div class='line' id='LC269'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC270'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">},</span></div><div class='line' id='LC271'><br/></div><div class='line' id='LC272'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// restore element to its original state which was disabled by &#39;disableElement&#39; above</span></div><div class='line' id='LC273'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">enableElement</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC274'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC275'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">));</span> <span class="c1">// set to old enabled state</span></div><div class='line' id='LC276'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">removeData</span><span class="p">(</span><span class="s1">&#39;ujs:enable-with&#39;</span><span class="p">);</span> <span class="c1">// clean up cache</span></div><div class='line' id='LC277'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC278'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">element</span><span class="p">.</span><span class="nx">unbind</span><span class="p">(</span><span class="s1">&#39;click.railsDisable&#39;</span><span class="p">);</span> <span class="c1">// enable element</span></div><div class='line' id='LC279'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC280'><br/></div><div class='line' id='LC281'>&nbsp;&nbsp;<span class="p">};</span></div><div class='line' id='LC282'><br/></div><div class='line' id='LC283'>&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">$document</span><span class="p">,</span> <span class="s1">&#39;rails:attachBindings&#39;</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC284'><br/></div><div class='line' id='LC285'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$</span><span class="p">.</span><span class="nx">ajaxPrefilter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">originalOptions</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">){</span> <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">crossDomain</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">CSRFProtection</span><span class="p">(</span><span class="nx">xhr</span><span class="p">);</span> <span class="p">}});</span></div><div class='line' id='LC286'><br/></div><div class='line' id='LC287'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">linkDisableSelector</span><span class="p">,</span> <span class="s1">&#39;ajax:complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></div><div class='line' id='LC288'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">rails</span><span class="p">.</span><span class="nx">enableElement</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">));</span></div><div class='line' id='LC289'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC290'><br/></div><div class='line' id='LC291'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">linkClickSelector</span><span class="p">,</span> <span class="s1">&#39;click.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC292'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="nx">method</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">),</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">);</span></div><div class='line' id='LC293'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rails</span><span class="p">.</span><span class="nx">allowAction</span><span class="p">(</span><span class="nx">link</span><span class="p">))</span> <span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span></div><div class='line' id='LC294'><br/></div><div class='line' id='LC295'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">linkDisableSelector</span><span class="p">))</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">disableElement</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span></div><div class='line' id='LC296'><br/></div><div class='line' id='LC297'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;remote&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC298'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">metaKey</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">!</span><span class="nx">method</span> <span class="o">||</span> <span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;GET&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">data</span> <span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">}</span></div><div class='line' id='LC299'><br/></div><div class='line' id='LC300'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">handleRemote</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">handleRemote</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span></div><div class='line' id='LC301'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// response from rails.handleRemote() will either be false or a deferred object promise.</span></div><div class='line' id='LC302'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">handleRemote</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC303'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">rails</span><span class="p">.</span><span class="nx">enableElement</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span></div><div class='line' id='LC304'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="p">{</span></div><div class='line' id='LC305'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">handleRemote</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">enableElement</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span> <span class="p">}</span> <span class="p">);</span></div><div class='line' id='LC306'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC307'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC308'><br/></div><div class='line' id='LC309'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">))</span> <span class="p">{</span></div><div class='line' id='LC310'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">rails</span><span class="p">.</span><span class="nx">handleMethod</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span></div><div class='line' id='LC311'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC312'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC313'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC314'><br/></div><div class='line' id='LC315'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">buttonClickSelector</span><span class="p">,</span> <span class="s1">&#39;click.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC316'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span></div><div class='line' id='LC317'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rails</span><span class="p">.</span><span class="nx">allowAction</span><span class="p">(</span><span class="nx">button</span><span class="p">))</span> <span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span></div><div class='line' id='LC318'><br/></div><div class='line' id='LC319'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">rails</span><span class="p">.</span><span class="nx">handleRemote</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span></div><div class='line' id='LC320'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC321'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC322'><br/></div><div class='line' id='LC323'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">inputChangeSelector</span><span class="p">,</span> <span class="s1">&#39;change.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC324'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span></div><div class='line' id='LC325'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rails</span><span class="p">.</span><span class="nx">allowAction</span><span class="p">(</span><span class="nx">link</span><span class="p">))</span> <span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span></div><div class='line' id='LC326'><br/></div><div class='line' id='LC327'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">rails</span><span class="p">.</span><span class="nx">handleRemote</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span></div><div class='line' id='LC328'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC329'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC330'><br/></div><div class='line' id='LC331'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">formSubmitSelector</span><span class="p">,</span> <span class="s1">&#39;submit.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC332'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span></div><div class='line' id='LC333'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">remote</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;remote&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">,</span></div><div class='line' id='LC334'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">blankRequiredInputs</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">blankInputs</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">requiredInputSelector</span><span class="p">),</span></div><div class='line' id='LC335'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">nonBlankFileInputs</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">nonBlankInputs</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">fileInputSelector</span><span class="p">);</span></div><div class='line' id='LC336'><br/></div><div class='line' id='LC337'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rails</span><span class="p">.</span><span class="nx">allowAction</span><span class="p">(</span><span class="nx">form</span><span class="p">))</span> <span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span></div><div class='line' id='LC338'><br/></div><div class='line' id='LC339'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// skip other logic when required values are missing or file upload is present</span></div><div class='line' id='LC340'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">blankRequiredInputs</span> <span class="o">&amp;&amp;</span> <span class="nx">form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;novalidate&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="s1">&#39;ajax:aborted:required&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">blankRequiredInputs</span><span class="p">]))</span> <span class="p">{</span></div><div class='line' id='LC341'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span></div><div class='line' id='LC342'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC343'><br/></div><div class='line' id='LC344'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">remote</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC345'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="nx">nonBlankFileInputs</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC346'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// slight timeout so that the submit button gets properly serialized</span></div><div class='line' id='LC347'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// (make it easy for event handler to serialize form without disabled values)</span></div><div class='line' id='LC348'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">disableFormElements</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span> <span class="p">},</span> <span class="mi">13</span><span class="p">);</span></div><div class='line' id='LC349'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">aborted</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="s1">&#39;ajax:aborted:file&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">nonBlankFileInputs</span><span class="p">]);</span></div><div class='line' id='LC350'><br/></div><div class='line' id='LC351'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// re-enable form elements if event bindings return false (canceling normal form submission)</span></div><div class='line' id='LC352'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">aborted</span><span class="p">)</span> <span class="p">{</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">enableFormElements</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span> <span class="p">},</span> <span class="mi">13</span><span class="p">);</span> <span class="p">}</span></div><div class='line' id='LC353'><br/></div><div class='line' id='LC354'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="nx">aborted</span><span class="p">;</span></div><div class='line' id='LC355'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC356'><br/></div><div class='line' id='LC357'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">rails</span><span class="p">.</span><span class="nx">handleRemote</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span></div><div class='line' id='LC358'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="kc">false</span><span class="p">;</span></div><div class='line' id='LC359'><br/></div><div class='line' id='LC360'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span> <span class="k">else</span> <span class="p">{</span></div><div class='line' id='LC361'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// slight timeout so that the submit button gets properly serialized</span></div><div class='line' id='LC362'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">disableFormElements</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span> <span class="p">},</span> <span class="mi">13</span><span class="p">);</span></div><div class='line' id='LC363'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC364'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC365'><br/></div><div class='line' id='LC366'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">formInputClickSelector</span><span class="p">,</span> <span class="s1">&#39;click.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC367'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span></div><div class='line' id='LC368'><br/></div><div class='line' id='LC369'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rails</span><span class="p">.</span><span class="nx">allowAction</span><span class="p">(</span><span class="nx">button</span><span class="p">))</span> <span class="k">return</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">stopEverything</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span></div><div class='line' id='LC370'><br/></div><div class='line' id='LC371'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// register the pressed submit button</span></div><div class='line' id='LC372'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">button</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span></div><div class='line' id='LC373'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">data</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">?</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="nx">button</span><span class="p">.</span><span class="nx">val</span><span class="p">()}</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span></div><div class='line' id='LC374'><br/></div><div class='line' id='LC375'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">button</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;ujs:submit-button&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span></div><div class='line' id='LC376'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC377'><br/></div><div class='line' id='LC378'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">formSubmitSelector</span><span class="p">,</span> <span class="s1">&#39;ajax:beforeSend.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC379'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">disableFormElements</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">));</span></div><div class='line' id='LC380'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC381'><br/></div><div class='line' id='LC382'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$document</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">rails</span><span class="p">.</span><span class="nx">formSubmitSelector</span><span class="p">,</span> <span class="s1">&#39;ajax:complete.rails&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span></div><div class='line' id='LC383'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="nx">rails</span><span class="p">.</span><span class="nx">enableFormElements</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">));</span></div><div class='line' id='LC384'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC385'><br/></div><div class='line' id='LC386'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span></div><div class='line' id='LC387'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c1">// making sure that all forms have actual up-to-date token(cached forms contain old one)</span></div><div class='line' id='LC388'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">csrf_token</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=csrf-token]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span></div><div class='line' id='LC389'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kd">var</span> <span class="nx">csrf_param</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=csrf-param]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span></div><div class='line' id='LC390'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form input[name=&quot;&#39;</span> <span class="o">+</span> <span class="nx">csrf_param</span> <span class="o">+</span> <span class="s1">&#39;&quot;]&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">csrf_token</span><span class="p">);</span></div><div class='line' id='LC391'>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">});</span></div><div class='line' id='LC392'>&nbsp;&nbsp;<span class="p">}</span></div><div class='line' id='LC393'><br/></div><div class='line' id='LC394'><span class="p">})(</span> <span class="nx">jQuery</span> <span class="p">);</span></div></pre></div>
+                <div class="highlight">
+                    <pre>
+                        <div class='line' id='LC1'>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">$</span>
+                            <span class="p">,</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC2'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC3'>
+                            <span class="cm">/**</span>
+                        </div>
+                        <div class='line' id='LC4'>
+                            <span class="cm"> * Unobtrusive scripting adapter for jQuery</span>
+                        </div>
+                        <div class='line' id='LC5'>
+                            <span class="cm"> * https://github.com/rails/jquery-ujs</span>
+                        </div>
+                        <div class='line' id='LC6'>
+                            <span class="cm"> *</span>
+                        </div>
+                        <div class='line' id='LC7'>
+                            <span class="cm"> * Requires jQuery 1.7.0 or later.</span>
+                        </div>
+                        <div class='line' id='LC8'>
+                            <span class="cm"> *</span>
+                        </div>
+                        <div class='line' id='LC9'>
+                            <span class="cm"> * Released under the MIT license</span>
+                        </div>
+                        <div class='line' id='LC10'>
+                            <span class="cm"> *</span>
+                        </div>
+                        <div class='line' id='LC11'>
+                            <span class="cm"> */</span>
+                        </div>
+                        <div class='line' id='LC12'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC13'>&nbsp;&nbsp;
+                            <span class="c1">// Cut down on the number of issues from people inadvertently including jquery_ujs twice</span>
+                        </div>
+                        <div class='line' id='LC14'>&nbsp;&nbsp;
+                            <span class="c1">// by detecting and raising an error when it happens.</span>
+                        </div>
+                        <div class='line' id='LC15'>&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">rails</span>
+                            <span class="o">!==</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC16'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">error</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;jquery-ujs has already been loaded!&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC17'>&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC18'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC19'>&nbsp;&nbsp;
+                            <span class="c1">// Shorthand to make it a little easier to call public rails functions from within rails.js</span>
+                        </div>
+                        <div class='line' id='LC20'>&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">rails</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC21'>&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">$document</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="nb">document</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC22'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC23'>&nbsp;&nbsp;
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">rails</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="o">=</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC24'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Link elements bound by jquery-ujs</span>
+                        </div>
+                        <div class='line' id='LC25'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">linkClickSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;a[data-confirm], a[data-method], a[data-remote], a[data-disable-with]&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC26'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC27'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Button elements boud jquery-ujs</span>
+                        </div>
+                        <div class='line' id='LC28'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">buttonClickSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;button[data-remote]&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC29'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC30'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Select elements bound by jquery-ujs</span>
+                        </div>
+                        <div class='line' id='LC31'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">inputChangeSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;select[data-remote], input[data-remote], textarea[data-remote]&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC32'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC33'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Form elements bound by jquery-ujs</span>
+                        </div>
+                        <div class='line' id='LC34'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">formSubmitSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;form&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC35'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC36'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Form input elements bound by jquery-ujs</span>
+                        </div>
+                        <div class='line' id='LC37'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">formInputClickSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;form input[type=submit], form input[type=image], form button[type=submit], form button:not([type])&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC38'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC39'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Form input elements disabled during form submission</span>
+                        </div>
+                        <div class='line' id='LC40'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">disableSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;input[data-disable-with], button[data-disable-with], textarea[data-disable-with]&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC41'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC42'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Form input elements re-enabled after form submission</span>
+                        </div>
+                        <div class='line' id='LC43'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">enableSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC44'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC45'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Form required input elements</span>
+                        </div>
+                        <div class='line' id='LC46'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">requiredInputSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;input[name][required]:not([disabled]),textarea[name][required]:not([disabled])&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC47'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC48'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Form file input elements</span>
+                        </div>
+                        <div class='line' id='LC49'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">fileInputSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;input[type=file]&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC50'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC51'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Link onClick disable selector with possible reenable after remote submission</span>
+                        </div>
+                        <div class='line' id='LC52'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">linkDisableSelector</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;a[data-disable-with]&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC53'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC54'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Make sure that every Ajax request sends the CSRF token</span>
+                        </div>
+                        <div class='line' id='LC55'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">CSRFProtection</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC56'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">token</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;meta[name=&quot;csrf-token&quot;]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;content&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC57'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">token</span>
+                            <span class="p">)</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">.</span>
+                            <span class="nx">setRequestHeader</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;X-CSRF-Token&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">token</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC58'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC59'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC60'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Triggers an event on an element and returns false if the event result is false</span>
+                        </div>
+                        <div class='line' id='LC61'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">fire</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">obj</span>
+                            <span class="p">,</span>
+                            <span class="nx">name</span>
+                            <span class="p">,</span>
+                            <span class="nx">data</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC62'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">event</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">Event</span>
+                            <span class="p">(</span>
+                            <span class="nx">name</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC63'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">obj</span>
+                            <span class="p">.</span>
+                            <span class="nx">trigger</span>
+                            <span class="p">(</span>
+                            <span class="nx">event</span>
+                            <span class="p">,</span>
+                            <span class="nx">data</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC64'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">event</span>
+                            <span class="p">.</span>
+                            <span class="nx">result</span>
+                            <span class="o">!==</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC65'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC66'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC67'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Default confirm dialog, may be overridden with custom confirm dialog in $.rails.confirm</span>
+                        </div>
+                        <div class='line' id='LC68'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">confirm</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">message</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC69'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">confirm</span>
+                            <span class="p">(</span>
+                            <span class="nx">message</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC70'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC71'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC72'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Default ajax function, may be overridden with custom function in $.rails.ajax</span>
+                        </div>
+                        <div class='line' id='LC73'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">ajax</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">options</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC74'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">ajax</span>
+                            <span class="p">(</span>
+                            <span class="nx">options</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC75'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC76'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC77'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Default way to get an element&#39;s href. May be overridden at $.rails.href.</span>
+                        </div>
+                        <div class='line' id='LC78'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">href</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC79'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;href&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC80'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC81'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC82'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Submits &quot;remote&quot; forms and links with ajax</span>
+                        </div>
+                        <div class='line' id='LC83'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">handleRemote</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC84'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">method</span>
+                            <span class="p">,</span>
+                            <span class="nx">url</span>
+                            <span class="p">,</span>
+                            <span class="nx">data</span>
+                            <span class="p">,</span>
+                            <span class="nx">elCrossDomain</span>
+                            <span class="p">,</span>
+                            <span class="nx">crossDomain</span>
+                            <span class="p">,</span>
+                            <span class="nx">withCredentials</span>
+                            <span class="p">,</span>
+                            <span class="nx">dataType</span>
+                            <span class="p">,</span>
+                            <span class="nx">options</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC85'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC86'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:before&#39;</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC87'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">elCrossDomain</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;cross-domain&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC88'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">crossDomain</span>
+                            <span class="o">=</span>
+                            <span class="nx">elCrossDomain</span>
+                            <span class="o">===</span>
+                            <span class="kc">undefined</span>
+                            <span class="o"></span>
+                            <span class="kc">null</span>
+                            <span class="o">:</span>
+                            <span class="nx">elCrossDomain</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC89'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">withCredentials</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;with-credentials&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">||</span>
+                            <span class="kc">null</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC90'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">dataType</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;type&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">||</span>
+                            <span class="p">(</span>
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">ajaxSettings</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">ajaxSettings</span>
+                            <span class="p">.</span>
+                            <span class="nx">dataType</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC91'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC92'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;form&#39;</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC93'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC94'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">url</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;action&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC95'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">serializeArray</span>
+                            <span class="p">();</span>
+                        </div>
+                        <div class='line' id='LC96'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// memoized value from clicked submit button</span>
+                        </div>
+                        <div class='line' id='LC97'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">button</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:submit-button&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC98'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">button</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC99'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">data</span>
+                            <span class="p">.</span>
+                            <span class="nx">push</span>
+                            <span class="p">(</span>
+                            <span class="nx">button</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC100'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:submit-button&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kc">null</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC101'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC102'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">inputChangeSelector</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC103'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC104'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">url</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;url&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC105'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">serialize</span>
+                            <span class="p">();</span>
+                        </div>
+                        <div class='line' id='LC106'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;params&#39;</span>
+                            <span class="p">))</span>
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">data</span>
+                            <span class="o">+</span>
+                            <span class="s2">&quot;&amp;&quot;</span>
+                            <span class="o">+</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;params&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC107'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">buttonClickSelector</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC108'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">||</span>
+                            <span class="s1">&#39;get&#39;</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC109'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">url</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;url&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC110'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">serialize</span>
+                            <span class="p">();</span>
+                        </div>
+                        <div class='line' id='LC111'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;params&#39;</span>
+                            <span class="p">))</span>
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">data</span>
+                            <span class="o">+</span>
+                            <span class="s2">&quot;&amp;&quot;</span>
+                            <span class="o">+</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;params&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC112'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC113'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC114'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">url</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">href</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC115'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;params&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">||</span>
+                            <span class="kc">null</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC116'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC117'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC118'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">options</span>
+                            <span class="o">=</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC119'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">type</span>
+                            <span class="o">:</span>
+                            <span class="nx">method</span>
+                            <span class="o">||</span>
+                            <span class="s1">&#39;GET&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">data</span>
+                            <span class="o">:</span>
+                            <span class="nx">data</span>
+                            <span class="p">,</span>
+                            <span class="nx">dataType</span>
+                            <span class="o">:</span>
+                            <span class="nx">dataType</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC120'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// stopping the &quot;ajax:beforeSend&quot; event will cancel the ajax request</span>
+                        </div>
+                        <div class='line' id='LC121'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">beforeSend</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">,</span>
+                            <span class="nx">settings</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC122'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">settings</span>
+                            <span class="p">.</span>
+                            <span class="nx">dataType</span>
+                            <span class="o">===</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC123'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">xhr</span>
+                            <span class="p">.</span>
+                            <span class="nx">setRequestHeader</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;accept&#39;</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;*/*;q=0.5, &#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">settings</span>
+                            <span class="p">.</span>
+                            <span class="nx">accepts</span>
+                            <span class="p">.</span>
+                            <span class="nx">script</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC124'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC125'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:beforeSend&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">,</span>
+                            <span class="nx">settings</span>
+                            <span class="p">]);</span>
+                        </div>
+                        <div class='line' id='LC126'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC127'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">success</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">data</span>
+                            <span class="p">,</span>
+                            <span class="nx">status</span>
+                            <span class="p">,</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC128'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">trigger</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ajax:success&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">data</span>
+                            <span class="p">,</span>
+                            <span class="nx">status</span>
+                            <span class="p">,</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">]);</span>
+                        </div>
+                        <div class='line' id='LC129'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC130'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">complete</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">,</span>
+                            <span class="nx">status</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC131'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">trigger</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ajax:complete&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">,</span>
+                            <span class="nx">status</span>
+                            <span class="p">]);</span>
+                        </div>
+                        <div class='line' id='LC132'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC133'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">error</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">,</span>
+                            <span class="nx">status</span>
+                            <span class="p">,</span>
+                            <span class="nx">error</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC134'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">trigger</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ajax:error&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">,</span>
+                            <span class="nx">status</span>
+                            <span class="p">,</span>
+                            <span class="nx">error</span>
+                            <span class="p">]);</span>
+                        </div>
+                        <div class='line' id='LC135'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC136'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">crossDomain</span>
+                            <span class="o">:</span>
+                            <span class="nx">crossDomain</span>
+                        </div>
+                        <div class='line' id='LC137'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">};</span>
+                        </div>
+                        <div class='line' id='LC138'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC139'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// There is no withCredentials for IE6-8 when</span>
+                        </div>
+                        <div class='line' id='LC140'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// &quot;Enable native XMLHTTP support&quot; is disabled</span>
+                        </div>
+                        <div class='line' id='LC141'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">withCredentials</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC142'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">options</span>
+                            <span class="p">.</span>
+                            <span class="nx">xhrFields</span>
+                            <span class="o">=</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC143'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">withCredentials</span>
+                            <span class="o">:</span>
+                            <span class="nx">withCredentials</span>
+                        </div>
+                        <div class='line' id='LC144'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">};</span>
+                        </div>
+                        <div class='line' id='LC145'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC146'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC147'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Only pass url to `ajax` options if not blank</span>
+                        </div>
+                        <div class='line' id='LC148'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">url</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="nx">options</span>
+                            <span class="p">.</span>
+                            <span class="nx">url</span>
+                            <span class="o">=</span>
+                            <span class="nx">url</span>
+                            <span class="p">;</span>
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC149'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC150'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">jqxhr</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">ajax</span>
+                            <span class="p">(</span>
+                            <span class="nx">options</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC151'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">trigger</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ajax:send&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">jqxhr</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC152'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">jqxhr</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC153'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC154'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC155'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC156'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC157'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC158'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Handles &quot;data-method&quot; on links such as:</span>
+                        </div>
+                        <div class='line' id='LC159'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// &lt;a href=&quot;/users/5&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot; data-confirm=&quot;Are you sure&quot;&gt;Delete&lt;/a&gt;</span>
+                        </div>
+                        <div class='line' id='LC160'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">handleMethod</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC161'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">href</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">href</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC162'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC163'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">target</span>
+                            <span class="o">=</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;target&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC164'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">csrf_token</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;meta[name=csrf-token]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;content&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC165'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">csrf_param</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;meta[name=csrf-param]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;content&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC166'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">form</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;&lt;form method=&quot;post&quot; action=&quot;&#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">href</span>
+                            <span class="o">+</span>
+                            <span class="s1">&#39;&quot;&gt;&lt;/form&gt;&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC167'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">metadata_input</span>
+                            <span class="o">=</span>
+                            <span class="s1">&#39;&lt;input name=&quot;_method&quot; value=&quot;&#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">method</span>
+                            <span class="o">+</span>
+                            <span class="s1">&#39;&quot; type=&quot;hidden&quot; /&gt;&#39;</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC168'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC169'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">csrf_param</span>
+                            <span class="o">!==</span>
+                            <span class="kc">undefined</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="nx">csrf_token</span>
+                            <span class="o">!==</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC170'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">metadata_input</span>
+                            <span class="o">+=</span>
+                            <span class="s1">&#39;&lt;input name=&quot;&#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">csrf_param</span>
+                            <span class="o">+</span>
+                            <span class="s1">&#39;&quot; value=&quot;&#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">csrf_token</span>
+                            <span class="o">+</span>
+                            <span class="s1">&#39;&quot; type=&quot;hidden&quot; /&gt;&#39;</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC171'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC172'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC173'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">target</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;target&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">target</span>
+                            <span class="p">);</span>
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC174'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC175'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">hide</span>
+                            <span class="p">().</span>
+                            <span class="nx">append</span>
+                            <span class="p">(</span>
+                            <span class="nx">metadata_input</span>
+                            <span class="p">).</span>
+                            <span class="nx">appendTo</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;body&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC176'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">submit</span>
+                            <span class="p">();</span>
+                        </div>
+                        <div class='line' id='LC177'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC178'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC179'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="cm">/* Disables form elements:</span>
+                        </div>
+                        <div class='line' id='LC180'>
+                            <span class="cm">      - Caches element value in &#39;ujs:enable-with&#39; data store</span>
+                        </div>
+                        <div class='line' id='LC181'>
+                            <span class="cm">      - Replaces element text with value of &#39;data-disable-with&#39; attribute</span>
+                        </div>
+                        <div class='line' id='LC182'>
+                            <span class="cm">      - Sets disabled property to true</span>
+                        </div>
+                        <div class='line' id='LC183'>
+                            <span class="cm">    */</span>
+                        </div>
+                        <div class='line' id='LC184'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">disableFormElements</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC185'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">find</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">disableSelector</span>
+                            <span class="p">).</span>
+                            <span class="nx">each</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC186'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">element</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">),</span>
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;button&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o"></span>
+                            <span class="s1">&#39;html&#39;</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;val&#39;</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC187'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">element</span>
+                            <span class="p">[</span>
+                            <span class="nx">method</span>
+                            <span class="p">]());</span>
+                        </div>
+                        <div class='line' id='LC188'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">[</span>
+                            <span class="nx">method</span>
+                            <span class="p">](</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;disable-with&#39;</span>
+                            <span class="p">));</span>
+                        </div>
+                        <div class='line' id='LC189'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">prop</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;disabled&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kc">true</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC190'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC191'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC192'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC193'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="cm">/* Re-enables disabled form elements:</span>
+                        </div>
+                        <div class='line' id='LC194'>
+                            <span class="cm">      - Replaces element text with cached value from &#39;ujs:enable-with&#39; data store (created in `disableFormElements`)</span>
+                        </div>
+                        <div class='line' id='LC195'>
+                            <span class="cm">      - Sets disabled property to false</span>
+                        </div>
+                        <div class='line' id='LC196'>
+                            <span class="cm">    */</span>
+                        </div>
+                        <div class='line' id='LC197'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">enableFormElements</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC198'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">find</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">enableSelector</span>
+                            <span class="p">).</span>
+                            <span class="nx">each</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC199'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">element</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">),</span>
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;button&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o"></span>
+                            <span class="s1">&#39;html&#39;</span>
+                            <span class="o">:</span>
+                            <span class="s1">&#39;val&#39;</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC200'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">))</span>
+                            <span class="nx">element</span>
+                            <span class="p">[</span>
+                            <span class="nx">method</span>
+                            <span class="p">](</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">));</span>
+                        </div>
+                        <div class='line' id='LC201'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">prop</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;disabled&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kc">false</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC202'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC203'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC204'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC205'>&nbsp;&nbsp;&nbsp;
+                            <span class="cm">/* For &#39;data-confirm&#39; attribute:</span>
+                        </div>
+                        <div class='line' id='LC206'>
+                            <span class="cm">      - Fires `confirm` event</span>
+                        </div>
+                        <div class='line' id='LC207'>
+                            <span class="cm">      - Shows the confirmation dialog</span>
+                        </div>
+                        <div class='line' id='LC208'>
+                            <span class="cm">      - Fires the `confirm:complete` event</span>
+                        </div>
+                        <div class='line' id='LC209'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC210'>
+                            <span class="cm">      Returns `true` if no function stops the chain and user chose yes; `false` otherwise.</span>
+                        </div>
+                        <div class='line' id='LC211'>
+                            <span class="cm">      Attaching a handler to the element&#39;s `confirm` event that returns a `falsy` value cancels the confirmation dialog.</span>
+                        </div>
+                        <div class='line' id='LC212'>
+                            <span class="cm">      Attaching a handler to the element&#39;s `confirm:complete` event that returns a `falsy` value makes this function</span>
+                        </div>
+                        <div class='line' id='LC213'>
+                            <span class="cm">      return false. The `confirm:complete` event is fired whether or not the user answered true or false to the dialog.</span>
+                        </div>
+                        <div class='line' id='LC214'>
+                            <span class="cm">   */</span>
+                        </div>
+                        <div class='line' id='LC215'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">allowAction</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC216'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">message</span>
+                            <span class="o">=</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;confirm&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC217'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">answer</span>
+                            <span class="o">=</span>
+                            <span class="kc">false</span>
+                            <span class="p">,</span>
+                            <span class="nx">callback</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC218'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">message</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="k">return</span>
+                            <span class="kc">true</span>
+                            <span class="p">;</span>
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC219'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC220'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;confirm&#39;</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC221'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">answer</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">confirm</span>
+                            <span class="p">(</span>
+                            <span class="nx">message</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC222'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">callback</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;confirm:complete&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">answer</span>
+                            <span class="p">]);</span>
+                        </div>
+                        <div class='line' id='LC223'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC224'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">answer</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="nx">callback</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC225'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC226'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC227'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Helper function which checks for blank inputs in a form that match the specified CSS selector</span>
+                        </div>
+                        <div class='line' id='LC228'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">blankInputs</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="nx">specifiedSelector</span>
+                            <span class="p">,</span>
+                            <span class="nx">nonBlank</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC229'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">inputs</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(),</span>
+                            <span class="nx">input</span>
+                            <span class="p">,</span>
+                            <span class="nx">valueToCheck</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC230'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">selector</span>
+                            <span class="o">=</span>
+                            <span class="nx">specifiedSelector</span>
+                            <span class="o">||</span>
+                            <span class="s1">&#39;input,textarea&#39;</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC231'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">allInputs</span>
+                            <span class="o">=</span>
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">find</span>
+                            <span class="p">(</span>
+                            <span class="nx">selector</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC232'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC233'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">allInputs</span>
+                            <span class="p">.</span>
+                            <span class="nx">each</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC234'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">input</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC235'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">valueToCheck</span>
+                            <span class="o">=</span>
+                            <span class="nx">input</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;input[type=checkbox],input[type=radio]&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o"></span>
+                            <span class="nx">input</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;:checked&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">:</span>
+                            <span class="nx">input</span>
+                            <span class="p">.</span>
+                            <span class="nx">val</span>
+                            <span class="p">();</span>
+                        </div>
+                        <div class='line' id='LC236'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// If nonBlank and valueToCheck are both truthy, or nonBlank and valueToCheck are both falsey</span>
+                        </div>
+                        <div class='line' id='LC237'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">valueToCheck</span>
+                            <span class="o">===</span>
+                            <span class="o">!</span>
+                            <span class="nx">nonBlank</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC238'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC239'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Don&#39;t count unchecked required radio if other radio with same name is checked</span>
+                        </div>
+                        <div class='line' id='LC240'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">input</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;input[type=radio]&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="nx">allInputs</span>
+                            <span class="p">.</span>
+                            <span class="nx">filter</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;input[type=radio]:checked[name=&quot;&#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">input</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;name&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">+</span>
+                            <span class="s1">&#39;&quot;]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">length</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC241'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">true</span>
+                            <span class="p">;</span>
+                            <span class="c1">// Skip to next input</span>
+                        </div>
+                        <div class='line' id='LC242'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC243'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC244'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">inputs</span>
+                            <span class="o">=</span>
+                            <span class="nx">inputs</span>
+                            <span class="p">.</span>
+                            <span class="nx">add</span>
+                            <span class="p">(</span>
+                            <span class="nx">input</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC245'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC246'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC247'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">inputs</span>
+                            <span class="p">.</span>
+                            <span class="nx">length</span>
+                            <span class="o"></span>
+                            <span class="nx">inputs</span>
+                            <span class="o">:</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC248'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC249'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC250'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Helper function which checks for non-blank inputs in a form that match the specified CSS selector</span>
+                        </div>
+                        <div class='line' id='LC251'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">nonBlankInputs</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="nx">specifiedSelector</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC252'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">blankInputs</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="nx">specifiedSelector</span>
+                            <span class="p">,</span>
+                            <span class="kc">true</span>
+                            <span class="p">);</span>
+                            <span class="c1">// true specifies nonBlank</span>
+                        </div>
+                        <div class='line' id='LC253'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC254'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC255'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// Helper function, needed to provide consistent behavior in IE</span>
+                        </div>
+                        <div class='line' id='LC256'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">stopEverything</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC257'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">.</span>
+                            <span class="nx">target</span>
+                            <span class="p">).</span>
+                            <span class="nx">trigger</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:everythingStopped&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC258'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">e</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopImmediatePropagation</span>
+                            <span class="p">();</span>
+                        </div>
+                        <div class='line' id='LC259'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC260'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC261'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC262'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">//  replace element&#39;s html with the &#39;data-disable-with&#39; after storing original html</span>
+                        </div>
+                        <div class='line' id='LC263'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">//  and prevent clicking on it</span>
+                        </div>
+                        <div class='line' id='LC264'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">disableElement</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC265'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">html</span>
+                            <span class="p">());</span>
+                            <span class="c1">// store enabled state</span>
+                        </div>
+                        <div class='line' id='LC266'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">html</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;disable-with&#39;</span>
+                            <span class="p">));</span>
+                            <span class="c1">// set to disabled state</span>
+                        </div>
+                        <div class='line' id='LC267'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">bind</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;click.railsDisable&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="c1">// prevent further clicking</span>
+                        </div>
+                        <div class='line' id='LC268'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC269'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC270'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">},</span>
+                        </div>
+                        <div class='line' id='LC271'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC272'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// restore element to its original state which was disabled by &#39;disableElement&#39; above</span>
+                        </div>
+                        <div class='line' id='LC273'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">enableElement</span>
+                            <span class="o">:</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC274'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">!==</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC275'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">html</span>
+                            <span class="p">(</span>
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">));</span>
+                            <span class="c1">// set to old enabled state</span>
+                        </div>
+                        <div class='line' id='LC276'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">removeData</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:enable-with&#39;</span>
+                            <span class="p">);</span>
+                            <span class="c1">// clean up cache</span>
+                        </div>
+                        <div class='line' id='LC277'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC278'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">element</span>
+                            <span class="p">.</span>
+                            <span class="nx">unbind</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;click.railsDisable&#39;</span>
+                            <span class="p">);</span>
+                            <span class="c1">// enable element</span>
+                        </div>
+                        <div class='line' id='LC279'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC280'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC281'>&nbsp;&nbsp;
+                            <span class="p">};</span>
+                        </div>
+                        <div class='line' id='LC282'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC283'>&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">$document</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;rails:attachBindings&#39;</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC284'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC285'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$</span>
+                            <span class="p">.</span>
+                            <span class="nx">ajaxPrefilter</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">options</span>
+                            <span class="p">,</span>
+                            <span class="nx">originalOptions</span>
+                            <span class="p">,</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">)(</span>
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">options</span>
+                            <span class="p">.</span>
+                            <span class="nx">crossDomain</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">CSRFProtection</span>
+                            <span class="p">(</span>
+                            <span class="nx">xhr</span>
+                            <span class="p">);</span>
+                            <span class="p">}});</span>
+                        </div>
+                        <div class='line' id='LC286'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC287'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">linkDisableSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:complete&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">()</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC288'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">enableElement</span>
+                            <span class="p">(</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">));</span>
+                        </div>
+                        <div class='line' id='LC289'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC290'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC291'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">linkClickSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;click.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC292'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">link</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">),</span>
+                            <span class="nx">method</span>
+                            <span class="o">=</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">),</span>
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;params&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC293'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">allowAction</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">))</span>
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC294'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC295'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">is</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">linkDisableSelector</span>
+                            <span class="p">))</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">disableElement</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC296'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC297'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;remote&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">!==</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC298'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">.</span>
+                            <span class="nx">metaKey</span>
+                            <span class="o">||</span>
+                            <span class="nx">e</span>
+                            <span class="p">.</span>
+                            <span class="nx">ctrlKey</span>
+                            <span class="p">)</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">method</span>
+                            <span class="o">||</span>
+                            <span class="nx">method</span>
+                            <span class="o">===</span>
+                            <span class="s1">&#39;GET&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="o">!</span>
+                            <span class="nx">data</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="k">return</span>
+                            <span class="kc">true</span>
+                            <span class="p">;</span>
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC299'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC300'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">handleRemote</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">handleRemote</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC301'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// response from rails.handleRemote() will either be false or a deferred object promise.</span>
+                        </div>
+                        <div class='line' id='LC302'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">handleRemote</span>
+                            <span class="o">===</span>
+                            <span class="kc">false</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC303'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">enableElement</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC304'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC305'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">handleRemote</span>
+                            <span class="p">.</span>
+                            <span class="nx">error</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">enableElement</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">);</span>
+                            <span class="p">}</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC306'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC307'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC308'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC309'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;method&#39;</span>
+                            <span class="p">))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC310'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">handleMethod</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC311'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC312'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC313'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC314'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC315'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">buttonClickSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;click.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC316'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">button</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC317'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">allowAction</span>
+                            <span class="p">(</span>
+                            <span class="nx">button</span>
+                            <span class="p">))</span>
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC318'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC319'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">handleRemote</span>
+                            <span class="p">(</span>
+                            <span class="nx">button</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC320'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC321'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC322'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC323'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">inputChangeSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;change.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC324'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">link</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC325'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">allowAction</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">))</span>
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC326'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC327'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">handleRemote</span>
+                            <span class="p">(</span>
+                            <span class="nx">link</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC328'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC329'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC330'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC331'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">formSubmitSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;submit.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC332'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">form</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC333'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">remote</span>
+                            <span class="o">=</span>
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;remote&#39;</span>
+                            <span class="p">)</span>
+                            <span class="o">!==</span>
+                            <span class="kc">undefined</span>
+                            <span class="p">,</span>
+                        </div>
+                        <div class='line' id='LC334'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">blankRequiredInputs</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">blankInputs</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">requiredInputSelector</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC335'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">nonBlankFileInputs</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">nonBlankInputs</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fileInputSelector</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC336'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC337'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">allowAction</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">))</span>
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC338'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC339'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// skip other logic when required values are missing or file upload is present</span>
+                        </div>
+                        <div class='line' id='LC340'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">blankRequiredInputs</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="nx">form</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s2">&quot;novalidate&quot;</span>
+                            <span class="p">)</span>
+                            <span class="o">==</span>
+                            <span class="kc">undefined</span>
+                            <span class="o">&amp;&amp;</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:aborted:required&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">blankRequiredInputs</span>
+                            <span class="p">]))</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC341'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">e</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC342'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC343'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC344'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">remote</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC345'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="nx">nonBlankFileInputs</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC346'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// slight timeout so that the submit button gets properly serialized</span>
+                        </div>
+                        <div class='line' id='LC347'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// (make it easy for event handler to serialize form without disabled values)</span>
+                        </div>
+                        <div class='line' id='LC348'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">setTimeout</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">disableFormElements</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">);</span>
+                            <span class="p">},</span>
+                            <span class="mi">13</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC349'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">aborted</span>
+                            <span class="o">=</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">fire</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:aborted:file&#39;</span>
+                            <span class="p">,</span>
+                            <span class="p">[</span>
+                            <span class="nx">nonBlankFileInputs</span>
+                            <span class="p">]);</span>
+                        </div>
+                        <div class='line' id='LC350'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC351'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// re-enable form elements if event bindings return false (canceling normal form submission)</span>
+                        </div>
+                        <div class='line' id='LC352'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">aborted</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                            <span class="nx">setTimeout</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">enableFormElements</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">);</span>
+                            <span class="p">},</span>
+                            <span class="mi">13</span>
+                            <span class="p">);</span>
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC353'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC354'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="nx">aborted</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC355'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC356'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC357'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">handleRemote</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC358'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">return</span>
+                            <span class="kc">false</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC359'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC360'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                            <span class="k">else</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC361'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// slight timeout so that the submit button gets properly serialized</span>
+                        </div>
+                        <div class='line' id='LC362'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">setTimeout</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">disableFormElements</span>
+                            <span class="p">(</span>
+                            <span class="nx">form</span>
+                            <span class="p">);</span>
+                            <span class="p">},</span>
+                            <span class="mi">13</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC363'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC364'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC365'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC366'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">formInputClickSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;click.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">event</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC367'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">button</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC368'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC369'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="o">!</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">allowAction</span>
+                            <span class="p">(</span>
+                            <span class="nx">button</span>
+                            <span class="p">))</span>
+                            <span class="k">return</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">stopEverything</span>
+                            <span class="p">(</span>
+                            <span class="nx">event</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC370'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC371'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// register the pressed submit button</span>
+                        </div>
+                        <div class='line' id='LC372'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">name</span>
+                            <span class="o">=</span>
+                            <span class="nx">button</span>
+                            <span class="p">.</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;name&#39;</span>
+                            <span class="p">),</span>
+                        </div>
+                        <div class='line' id='LC373'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">data</span>
+                            <span class="o">=</span>
+                            <span class="nx">name</span>
+                            <span class="o"></span>
+                            <span class="p">(</span>
+                            <span class="nx">name</span>
+                            <span class="o">:</span>
+                            <span class="nx">name</span>
+                            <span class="p">,</span>
+                            <span class="nx">value</span>
+                            <span class="o">:</span>
+                            <span class="nx">button</span>
+                            <span class="p">.</span>
+                            <span class="nx">val</span>
+                            <span class="p">()}</span>
+                            <span class="o">:</span>
+                            <span class="kc">null</span>
+                            <span class="p">;</span>
+                        </div>
+                        <div class='line' id='LC374'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC375'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">button</span>
+                            <span class="p">.</span>
+                            <span class="nx">closest</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;form&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">data</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;ujs:submit-button&#39;</span>
+                            <span class="p">,</span>
+                            <span class="nx">data</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC376'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC377'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC378'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">formSubmitSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:beforeSend.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">event</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC379'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="o">==</span>
+                            <span class="nx">event</span>
+                            <span class="p">.</span>
+                            <span class="nx">target</span>
+                            <span class="p">)</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">disableFormElements</span>
+                            <span class="p">(</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">));</span>
+                        </div>
+                        <div class='line' id='LC380'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC381'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC382'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$document</span>
+                            <span class="p">.</span>
+                            <span class="nx">delegate</span>
+                            <span class="p">(</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">formSubmitSelector</span>
+                            <span class="p">,</span>
+                            <span class="s1">&#39;ajax:complete.rails&#39;</span>
+                            <span class="p">,</span>
+                            <span class="kd">function</span>
+                            <span class="p">(</span>
+                            <span class="nx">event</span>
+                            <span class="p">)</span>
+                            <span class="p">(</span>
+                        </div>
+                        <div class='line' id='LC383'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="k">if</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="o">==</span>
+                            <span class="nx">event</span>
+                            <span class="p">.</span>
+                            <span class="nx">target</span>
+                            <span class="p">)</span>
+                            <span class="nx">rails</span>
+                            <span class="p">.</span>
+                            <span class="nx">enableFormElements</span>
+                            <span class="p">(</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="k">this</span>
+                            <span class="p">));</span>
+                        </div>
+                        <div class='line' id='LC384'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC385'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC386'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="kd">function</span>
+                            <span class="p">()(</span>
+                        </div>
+                        <div class='line' id='LC387'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="c1">// making sure that all forms have actual up-to-date token(cached forms contain old one)</span>
+                        </div>
+                        <div class='line' id='LC388'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">csrf_token</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;meta[name=csrf-token]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;content&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC389'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="kd">var</span>
+                            <span class="nx">csrf_param</span>
+                            <span class="o">=</span>
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;meta[name=csrf-param]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">attr</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;content&#39;</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC390'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="nx">$</span>
+                            <span class="p">(</span>
+                            <span class="s1">&#39;form input[name=&quot;&#39;</span>
+                            <span class="o">+</span>
+                            <span class="nx">csrf_param</span>
+                            <span class="o">+</span>
+                            <span class="s1">&#39;&quot;]&#39;</span>
+                            <span class="p">).</span>
+                            <span class="nx">val</span>
+                            <span class="p">(</span>
+                            <span class="nx">csrf_token</span>
+                            <span class="p">);</span>
+                        </div>
+                        <div class='line' id='LC391'>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="p">});</span>
+                        </div>
+                        <div class='line' id='LC392'>&nbsp;&nbsp;
+                            <span class="p">}</span>
+                        </div>
+                        <div class='line' id='LC393'>
+                            <br/>
+                        </div>
+                        <div class='line' id='LC394'>
+                            <span class="p">})(</span>
+                            <span class="nx">jQuery</span>
+                            <span class="p">);</span>
+                        </div>
+                    </pre>
+                </div>
             </td>
           </tr>
         </table>
