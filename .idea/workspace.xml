@@ -18,7 +18,7 @@
     <file path="/post.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380471939788" ignored="false" />
     <file path="/20130913222931_create_comments.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379111498444" ignored="false" />
     <file path="/_comment_form.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380067438667" ignored="false" />
-    <file path="/application.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380586502179" ignored="false" />
+    <file path="/application.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380657332365" ignored="false" />
     <file path="/new.html.erb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380480340668" ignored="false" />
     <file path="/posts_tags.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379294908527" ignored="false" />
     <file path="/20130916012755_create_posts_tags.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379294925111" ignored="false" />
@@ -124,19 +124,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="43" selection-start="655" selection-end="655" vertical-scroll-proportion="-8.5">
+            <state line="36" column="53" selection-start="1442" selection-end="1442" vertical-scroll-proportion="0.3115727">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rails.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="rails.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/rails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="40" column="0" selection-start="1475" selection-end="1475" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="75" column="23" selection-start="2328" selection-end="2328" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -1187,13 +1196,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="35" selection-start="734" selection-end="734" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/sessions_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="5" selection-start="862" selection-end="862" vertical-scroll-proportion="0.76454294" />
@@ -1279,16 +1281,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/rails.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="43" selection-start="655" selection-end="655" vertical-scroll-proportion="-8.5">
+        <state line="40" column="0" selection-start="1475" selection-end="1475" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/rails.js">
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="75" column="23" selection-start="2328" selection-end="2328" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="53" selection-start="1442" selection-end="1442" vertical-scroll-proportion="0.3115727">
           <folding />
         </state>
       </provider>

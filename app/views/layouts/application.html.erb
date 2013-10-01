@@ -34,7 +34,7 @@
 
               <% if signed_in? %>
                   <%= link_to "Update your Profile", edit_user_path(current_user) %>
-                  <%= link_to "Sign out", logout_path, method: "delete" %>
+                  <%= link_to "Sign out", logout_path %>
               <% else %>
                   <%= link_to "Sign in ", login_path %>
               <% end %>
