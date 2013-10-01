@@ -11,8 +11,8 @@ class Post < ActiveRecord::Base
 
   private
   def self.search_users(search)
-    users = User.all(:conditions => ['first_name LIKE ?', "%#{search}%"])
-
+    #users = User.all(:conditions => ['first_name LIKE ?', "%#{search}%"])
+    users = User.all(:conditions => ['first_name ILIKE ?', "%#{search}%"])
 
     if users
       Post.find_all_by_created_by(users, :order => 'order_date DESC')
@@ -22,7 +22,8 @@ class Post < ActiveRecord::Base
   end
 
   def self.search_content(search)
-    Post.all(:conditions => ['subject like ? or description LIKE ?', "%#{search}%", "%#{search}%"], :order => 'order_date DESC')
+    #Post.all(:conditions => ['subject like ? or description LIKE ?', "%#{search}%", "%#{search}%"], :order => 'order_date DESC')
+    Post.all(:conditions => ['subject ilike ? or description ILIKE ?', "%#{search}%", "%#{search}%"], :order => 'order_date DESC')
   end
 
   def self.search_tags(search)
@@ -49,7 +50,8 @@ class Post < ActiveRecord::Base
   end
 
   def self.search_categories(search)
-    category = Category.first(:conditions => ['name LIKE ?', "%#{search}%"])
+    #category = Category.first(:conditions => ['name LIKE ?', "%#{search}%"])
+    category = Category.first(:conditions => ['name ILIKE ?', "%#{search}%"])
     if category
       Post.find_all_by_category_id(category.id, :order => 'order_date DESC')
     else
