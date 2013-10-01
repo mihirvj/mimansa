@@ -73,7 +73,7 @@ Mimansa::Application.routes.draw do
 
   match '/signup', to: 'users#new', via: 'get'
   match '/login', to: 'sessions#new', via: 'get'
-  match '/logout', to: 'sessions#destroy', via: 'delete'
+  match '/logout', to: 'sessions#destroy', via: 'get'
 
   match '/users', :to => 'users#index', via: 'get' #mihir
   match '/users/:id/set_admin', :to => 'users#set_admin', as: 'set_admin' #mihir
