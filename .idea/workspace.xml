@@ -40,7 +40,7 @@
     <file path="$PROJECT_DIR$/../Gupshup/app/models/cat.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379696705148" ignored="false" />
     <file path="D:/RubyCodes/exam_module.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379698504874" ignored="false" />
     <file path="/exam_module.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1379698504874" ignored="false" />
-    <file path="/Gemfile" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380465156673" ignored="false" />
+    <file path="/Gemfile" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380588023647" ignored="false" />
     <file path="/users_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380583414617" ignored="false" />
     <file path="/application_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380585475037" ignored="false" />
     <file path="/sessions_controller.rb" changelist="a615c600-8bfa-41e6-8796-83755f53c59e" time="1380586022615" ignored="false" />
@@ -123,7 +123,7 @@
       <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="3" selection-start="714" selection-end="714" vertical-scroll-proportion="0.935">
+            <state line="9" column="3" selection-start="188" selection-end="188" vertical-scroll-proportion="0.25585285">
               <folding />
             </state>
           </provider>
@@ -1125,7 +1125,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="3" selection-start="714" selection-end="714" vertical-scroll-proportion="0.935">
+        <state line="9" column="3" selection-start="188" selection-end="188" vertical-scroll-proportion="0.25585285">
           <folding />
         </state>
       </provider>
