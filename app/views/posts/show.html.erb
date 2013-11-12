@@ -65,6 +65,9 @@ Votes: <%= votes_count @post.id %> &nbsp &nbsp<%= link_to 'Vote up', vote_up_pat
       <td>&nbsp Votes: <%= votes_comment_count comment.id %></td>
       <td><%= link_to 'Vote up', comment_vote_up_path(comment) %></td>
       <% if !current_user.nil? && is_owner?(comment, current_user, false) %>
+          <td><%= link_to 'Edit', comment_edit_path(comment) %></td>
+      <% end %>
+      <% if !current_user.nil? && (is_owner?(comment, current_user, false) || current_user.is_admin || current_user.is_super_admin) %>
         <td><%= link_to 'Remove Comment', comment_destroy_path(comment) %></td>
       <% end %>
     </tr>

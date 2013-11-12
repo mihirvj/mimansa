@@ -1,5 +1,7 @@
 module SessionsHelper
 
+#The functions defined here will be availiable to all the controllers
+
   def sign_in(user)
     remember_token = User.new_remember_token
 
@@ -26,10 +28,12 @@ module SessionsHelper
     user == current_user
   end
 
+  #This method checks whether user has logged in or not.
   def signed_in?
     !current_user.nil?
   end
 
+  #This method does the processing of sign_out.
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)

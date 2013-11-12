@@ -70,6 +70,9 @@ Mimansa::Application.routes.draw do
   match 'posts/:id/comment_destroy', :to => "posts#comment_destroy", as: 'comment_destroy'
   get 'posts/:id/edit', :to => "posts#edit", as: 'edit'
 
+  get 'posts/:id/comment_edit', :to => "posts#comment_edit", as: 'comment_edit'
+  post 'posts/:id/edit_comment', :to => "posts#edit_comment", as: 'edit_comment'
+
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup', to: 'users#new', via: 'get'

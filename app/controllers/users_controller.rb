@@ -38,6 +38,9 @@
     #votes_posts_per_month = votes_posts.count(:group => "strftime('%m', created_at)")
     #votes_comments_per_month = votes_comments.count(:group => "strftime('%m', created_at)")
 
+
+    #we need to change the method according to postgre so this method will not work in sqlite
+
     posts_per_month = posts.count(:group => "extract(month from created_at)")
     comments_per_month = comments.count(:group => "extract(month from created_at)")
     votes_posts_per_month = votes_posts.count(:group => "extract(month from created_at)")
@@ -138,6 +141,9 @@
     end
   end
 
+
+  #this method can convert any user into admin
+
    def set_admin
      @user = User.where(:id => params[:id]).first
 
@@ -151,7 +157,7 @@
        end
      end
    end
-
+   #for removing the rights of admin
    def unset_admin
      @user = User.where(:id => params[:id]).first
 

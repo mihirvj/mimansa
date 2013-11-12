@@ -1,0 +1,34 @@
+<h1>Editing comment</h1>
+
+<%= form_for(:comment, :url => {:action => 'edit_comment'}) do |f| %>
+    <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+          <ul>
+            <% @comment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :id %>
+    </div>
+    <br>
+
+    <% if signed_in? %>
+        <div class="actions">
+          <%= f.submit("Update Comment") %>
+        </div>
+    <% else %>
+        <%= link_to 'Login to Comment', login_path %>
+    <% end %>
+<% end %>
+
+
+<%= link_to 'Back', posts_path %>

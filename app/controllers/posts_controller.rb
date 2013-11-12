@@ -49,6 +49,7 @@ class PostsController < ApplicationController
     @categories = Category.all
   end
 
+  # votes up a comment
   def comment_vote_up
     comment = Comment.find(params[:id])
 
@@ -69,6 +70,7 @@ class PostsController < ApplicationController
     end
   end
 
+  # makes vote up
   def vote_up
     post = Post.find(params[:id])
 
@@ -91,6 +93,9 @@ class PostsController < ApplicationController
     end
   end
 
+  # returns if the request is valid
+  # checks if user is signed in
+  # checks if user is trying to make duplicate vote up
   def valid_request? obj, redirect, is_post
 
     if(!signed_in?)
@@ -121,6 +126,27 @@ class PostsController < ApplicationController
     return true
   end
 
+  # edits comment
+  def comment_edit
+    @comment = Comment.find(params[:id])
+  end
+
+  # edits comment
+  def edit_comment
+    @comment = Comment.find(params[:id])
+
+    respond_to do |format|
+      if @comment.update_attributes(params[:comment])
+        format.html { redirect_to post_path(@comment.posts_id), notice: 'Comment was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # deletes comment
   def comment_destroy
     comment = Comment.find(params[:id])
 
@@ -132,6 +158,7 @@ class PostsController < ApplicationController
     end
   end
 
+  # makes comment
   def comment
     post = Post.find(params[:id])
 
